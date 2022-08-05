@@ -1,0 +1,122 @@
+#!/usr/bin/env python3
+#This is a python code used to extract data for 'VEGFRA','XTIME','XLAT' and 'XLONG' from WRF output files which are in netCDF format so as to obtain a map of longitude against latitude for vegetation fraction.
+
+#Import libraries
+import netCDF4
+import numpy as np
+import matplotlib.pyplot as plt
+
+#Opening WRF output file
+f = netCDF4.Dataset('/home/neda/wrfv4/WRF/test/em_real/wrfout_d05_2021-10-01_00:00:00')
+print(f)
+
+#get all variable names
+print(f.variables.keys())
+
+for d in f.dimensions.items():
+  print(d)
+
+# Retrieving data for vegetation fraction
+veg_fra_class = f.variables['VEGFRA']
+veg_fra = veg_fra_class[:]
+
+print("type(veg_fra_class):")
+print(type(veg_fra_class))
+print("veg_fra_class.shape:")
+print(veg_fra_class.shape)
+print("veg_fra_class.dimensions:")
+print(veg_fra_class.dimensions)
+print("veg_fra_class.dtype:")
+print(veg_fra_class.dtype)
+print("veg_fra_class:")
+print(veg_fra_class)
+print("veg_fra.shape:")
+print(veg_fra.shape)
+print("veg_fra:")
+print(veg_fra)
+print()
+
+# Retrieving data for time_class
+time_class = f.variables['XTIME']
+time = time_class[:]
+
+print("type(time_class):")
+print(type(time_class))
+print("time_class.shape:")
+print(time_class.shape)
+print("time_class.dtype:")
+print(time_class.dtype)
+print("time_class:")
+print(time_class)
+print("time:")
+print(time)
+print()
+
+# Retrieving data for latitude
+lat_class = f.variables['XLAT']
+lat = lat_class[:]
+
+print("type(lat_class):")
+print(type(lat_class))
+print("lat_class.shape:")
+print(lat_class.shape)
+print("lat_class.dtype:")
+print(lat_class.dtype)
+print("lat_class:")
+print(lat_class)
+print("lat:")
+print(lat)
+print()
+
+# Retrieving data for longitude
+lon_class = f.variables['XLONG']
+lon = lon_class[:]
+
+print("type(lon_class):")
+print(type(lon_class))
+print("lon_class.shape:")
+print(lon_class.shape)
+print("lon_class.dtype:")
+print(lon_class.dtype)
+print("lon_class:")
+print(lon_class)
+print("lon:")
+print(lon)
+print()
+
+#Slicing 3D array for vegetation fraction. There are 29 elements, here we choose to slice the third one which has index 2
+vegetation_fraction = veg_fra[2, :, :]
+print("vegetation_fraction.shape")
+print(vegetation_fraction.shape)
+
+#Slicing 3D arrays for latitude and longitude. There are 29 elements for each, here we choose to slice the third one which has index 2
+longitude =  lon[2, :, :]
+print("longitude.shape")
+print(longitude.shape)
+print(longitude)
+latitude =  lat[2, :, :]
+print("latitude.shape")
+print(latitude.shape)
+print(latitude)
+
+# Title for the plot in black color
+plt.title('Vegetation fraction', color='k')
+
+# Label x axis
+plt.xlabel('Longitude (degrees)')
+
+# Label y axis
+plt.ylabel('Latitude (degrees)')
+
+#plt.pcolormesh(vegetation_fraction, cmap='plasma')
+fig = plt.pcolormesh(longitude, latitude, vegetation_fraction, cmap='jet')
+
+plt.colorbar();
+
+# Display the graph
+plt.show()
+
+
+
+
+
