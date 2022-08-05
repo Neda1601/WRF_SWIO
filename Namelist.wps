@@ -1,6 +1,3 @@
-#WRF namelist.wps for  5 domains: a coarse domain (d01) of 27 km resolution and 4 finer nested domains, d02 of resolution 9 km, d03 of resolution 3 km, d04 of resolution 1 km centered over Mauritius 
-#and d05 of resolution 1 km focused over Reunion
-
 &share
  wrf_core = 'ARW',
  max_dom = 5,
