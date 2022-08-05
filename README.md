@@ -3,3 +3,5 @@ WRF is a state-of-the-art atmospheric modeling system designed for both meteorol
 
 The namelist.wps and namelist.input files are used for running the WRF Preprocessing system (which includes geogrid.exe, ungrib.exe, and metgrid.exe) and the WRF model itself (which includes real.exe, wrf.exe, tc.exe, and ndown.exe). Multiple columns are used for multiple domains; however max_domains determines how many columns will be used. For example, if you use 3 columns, but only set max_dom = 2, the last column will be ignored.
 NOTE: Not all parameters have mulitple columns. 
+
+The aim of my project was to study the formation of clouds, precipitation and vegetation over the SWIO, particularly for Mauritius and Reunion island using WRF model version 4.2.2. Data was extracted from WRF output files (wrfout) which are in netCDF format using python scripts to generate graphs and maps for cloud fraction, total precipitation and vegetation fraction.
